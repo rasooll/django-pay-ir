@@ -7,13 +7,13 @@ class Payment(models.Model):
     """
 
     full_name = models.CharField(
-        name="Full name", blank=True, null=True
+        name="Full name", max_length=255, blank=True, null=True
     )
     amount = models.BigIntegerField(
         name="Amount"
     )
-    mobile = models.IntegerField(
-        name="Mobile number"
+    mobile = models.CharField(
+        name="Mobile number", max_length=255, blank=True, null=True
     )
     description = models.CharField(
         name="Description", max_length=255, blank=True, null=True
