@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 <h6 class="card-subtitle mb-2 text-muted">می‌توانید به آسانی مبلغ مورد نظر را واریز نمایید.</h6>
-<form class="form" target="{% url 'req_page' %}" method="POST">
+<form class="form" action="{% url 'req_page' %}" method="POST">
     {% csrf_token %}
     <div class="form-row">
         <div class="form-group col-md-6">
