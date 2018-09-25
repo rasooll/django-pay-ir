@@ -13,7 +13,7 @@ class Payment(models.Model):
         name="Amount"
     )
     mobile = models.CharField(
-        name="Mobile number", max_length=255, blank=True, null=True
+        name="Mobile number", max_length=11, blank=True, null=True
     )
     description = models.CharField(
         name="Description", max_length=255, blank=True, null=True
