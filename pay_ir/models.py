@@ -7,29 +7,29 @@ class Payment(models.Model):
     """
 
     full_name = models.CharField(
-        name="Full name", max_length=255, blank=True, null=True
+        verbose_name="Full name", max_length=255, blank=True, null=True
     )
     amount = models.BigIntegerField(
-        name="Amount"
+        verbose_name="Amount"
     )
     mobile = models.CharField(
-        name="Mobile number", max_length=11, blank=True, null=True
+        verbose_name="Mobile number", max_length=11, blank=True, null=True
     )
     description = models.CharField(
-        name="Description", max_length=255, blank=True, null=True
+        verbose_name="Description", max_length=255, blank=True, null=True
     )
     transid = models.IntegerField(
-        name="Trans ID"
+        verbose_name="Trans ID"
     )
     status = models.BooleanField(
-        name="Status", default=False
+        verbose_name="Status", default=False
     )
     card_number = models.BigIntegerField(
-        name="Card number", blank=True, null=True
+        verbose_name="Card number", blank=True, null=True
     )
     trace_number = models.BigIntegerField(
-        name="Trace number", blank=True, null=True
+        verbose_name="Trace number", blank=True, null=True
     )
     message = models.TextField(
-        name="Message", blank=True, null=True
+        verbose_name="Message", blank=True, null=True
     )
