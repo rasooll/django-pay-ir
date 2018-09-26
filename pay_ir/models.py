@@ -7,29 +7,51 @@ class Payment(models.Model):
     """
 
     full_name = models.CharField(
-        verbose_name="Full name", max_length=255, blank=True, null=True
+        verbose_name="نام و نام خانوادگی", max_length=255, blank=True, null=True
     )
     amount = models.BigIntegerField(
-        verbose_name="Amount"
+        verbose_name="مبلغ"
     )
     mobile = models.CharField(
-        verbose_name="Mobile number", max_length=11, blank=True, null=True
+        verbose_name="شماره موبایل", max_length=11, blank=True, null=True
     )
     description = models.CharField(
-        verbose_name="Description", max_length=255, blank=True, null=True
+        verbose_name="توضیحات", max_length=255, blank=True, null=True
     )
     transid = models.IntegerField(
-        verbose_name="Trans ID"
+        verbose_name="شماره فاکتور"
     )
     status = models.BooleanField(
-        verbose_name="Status", default=False
+        verbose_name="وضعیت", default=False
     )
     card_number = models.CharField(
-        verbose_name="Card number", max_length=18, blank=True, null=True
+        verbose_name="شماره کارت", max_length=18, blank=True, null=True
     )
     trace_number = models.CharField(
-        verbose_name="Trace number", max_length=255, blank=True, null=True
+        verbose_name="شماره پیگیری", max_length=255, blank=True, null=True
     )
     message = models.TextField(
-        verbose_name="Message", blank=True, null=True
+        verbose_name="پیام", blank=True, null=True
     )
+    insert_date_time = models.DateTimeField(
+        auto_now_add=True, verbose_name="زمان ایجاد"
+    )
+    payment_date_time = models.DateTimeField(
+        auto_now=True, verbose_name="زمان پرداخت"
+    )
+
+    def __str__(self):
+        return "TransID: {}, Amount: {}".format(self.transid, self.amount)
+
+    def get_status(self):
+        if self.status == 1:
+            status = "پرداخت شده"
+        else:
+            status = "پرداخت نشده"
+        return status
+    get_status.short_description = 'وضعیت'
+
+    class Meta:
+        verbose_name = "پرداخت"
+        verbose_name_plural = "پرداخت ها"
+        ordering = ["-payment_date_time"]
