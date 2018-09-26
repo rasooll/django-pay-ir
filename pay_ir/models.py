@@ -24,11 +24,11 @@ class Payment(models.Model):
     status = models.BooleanField(
         verbose_name="Status", default=False
     )
-    card_number = models.BigIntegerField(
-        verbose_name="Card number", blank=True, null=True
+    card_number = models.CharField(
+        verbose_name="Card number", max_length=18, blank=True, null=True
     )
-    trace_number = models.BigIntegerField(
-        verbose_name="Trace number", blank=True, null=True
+    trace_number = models.CharField(
+        verbose_name="Trace number", max_length=255, blank=True, null=True
     )
     message = models.TextField(
         verbose_name="Message", blank=True, null=True
