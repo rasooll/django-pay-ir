@@ -6,7 +6,21 @@ from .models import Payment
 import json
 import requests
 
-# Create your views here.
+
+def method_not_allowed():
+    """ This function only used when only POST method availabe. """
+
+    return HttpResponseNotAllowed(
+        ["POST"],
+        content=json.dumps({"details": "Method not allowed"}),
+        content_type="application/json"
+    )
+
+
+def error_code_message(response):
+    return HttpResponse(content="({}): {}".format(
+        response["errorCode"], response["errorMessage"]
+    ))
 
 
 def index(request):
@@ -46,17 +60,11 @@ def req(request):
             db.save()
             return redirect("https://pay.ir/payment/gateway/{}".format(str(trans_id)))
         else:
-            return HttpResponse(content="({}): {}".format(
-                response["errorCode"], response["errorMessage"]
-            ))
+            return error_code_message(response)
         return HttpResponse(content=redirect)
 
     else:
-        return HttpResponseNotAllowed(
-            ["POST"],
-            content=json.dumps({"details": "Method not allowed"}),
-            content_type="application/json"
-        )
+        return method_not_allowed()
 
 
 def verfication(request):
