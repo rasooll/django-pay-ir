@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseNotAllowed, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.conf import settings
 from .models import Payment
@@ -21,6 +22,17 @@ def error_code_message(response):
     return HttpResponse(content="({}): {}".format(
         response["errorCode"], response["errorMessage"]
     ))
+
+
+def verify_trans(trans_id):
+    url = "https://pay.ir/payment/verify"
+    data = {
+        "api": settings.PAY_IR_CONFIG.get("api_key"),
+        "transId": trans_id
+    }
+    headers = {"Content-Type": "application/json", }
+    resp = requests.post(url, data=json.dumps(data), headers=headers)
+    return resp.json()
 
 
 def index(request):
@@ -67,5 +79,40 @@ def req(request):
         return method_not_allowed()
 
 
+@csrf_exempt
 def verfication(request):
-    pass
+
+    if request.method == "POST":
+        status_code = int(request.POST.get("status"))
+        trans_id = request.POST.get("transId")
+        message = request.POST.get("message")
+        if status_code == 1:
+            card_number = request.POST.get("cardNumber")
+            trace_number = request.POST.get("traceNumber")
+        else:
+            data = {"message": message}
+            return render(request, "fail.html", data)
+        verify = verify_trans(trans_id)
+        if verify["status"] == 1:
+            data_query = Payment.objects.get(transid=trans_id)
+            if data_query.status == 0 and data_query.amount == int(verify["amount"]):
+                data_query.status = 1
+                data_query.card_number = card_number
+                data_query.trace_number = trace_number
+                data_query.message = message
+                data_query.save()
+                data = {
+                    "trace_number": trace_number,
+                    "amount": verify["amount"]
+                }
+                return render(request, "success.html", data)
+            else:
+                return render(request, "duplicate.html")
+        else:
+            data = {
+                "error": verify["errorMessage"],
+                "message": "در صورت کسر پول از حساب شما تا ۳۰ دقیقه آینده بازگشت داده می‌شود."
+            }
+            return render(request, "fail.html", data)
+    else:
+        return method_not_allowed()
