@@ -38,6 +38,8 @@ urlpatterns = [
 
 Note that the URL path can be whatever you want.
 
+Run `python manage.py migrate` to create the payments models.
+
 ### Tested on
 
 - Python (3.6.6)
