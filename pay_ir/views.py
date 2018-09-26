@@ -3,7 +3,7 @@ from django.http import HttpResponseNotAllowed, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.conf import settings
-from .models import Payment
+from pay_ir.models import Payment
 import json
 import requests
 
