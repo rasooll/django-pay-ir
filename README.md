@@ -1,5 +1,7 @@
 # Django payment module for Pay.ir
 
+![PyPI](https://img.shields.io/pypi/v/django-payment-payir.svg) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payment-payir.svg) ![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-payment-payir.svg)
+
 ## Installation
 
 First install package.
