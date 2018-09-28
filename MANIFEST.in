@@ -1,4 +1,6 @@
 include LICENSE
 include README.md
+exclude travis_settings.py
+exclude travis_urls.py
 recursive-include pay_ir/static *
 recursive-include pay_ir/templates *
