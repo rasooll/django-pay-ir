@@ -14,7 +14,8 @@ before_script:
   - cp travis_* django_pj/django_pj/
 
 script:
-  - coverage run --source=pay_ir django_pj/manage.py test --settings="django_pj.travis_settings"
+  - cd django_pj
+  - coverage run --source=pay_ir manage.py test --settings="django_pj.travis_settings"
 
 after_success:
 - coveralls
