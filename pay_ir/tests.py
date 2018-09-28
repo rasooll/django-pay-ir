@@ -62,7 +62,7 @@ class MainTests(TestCase):
     def test_payment_verify_middle(self):
         response = self.c.post(reverse('verify'), data={
             "status": 1,
-            "transId": 1,
+            "transId": "",
             "message": "OK",
             "cardNumber": "9634*****6578",
             "traceNumber": "876858"
