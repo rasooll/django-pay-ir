@@ -1,6 +1,11 @@
 # Django payment module for Pay.ir
 
-![PyPI](https://img.shields.io/pypi/v/django-payment-payir.svg) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payment-payir.svg) ![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-payment-payir.svg)
+[![Travis-CI](https://travis-ci.org/rasooll/django-pay-ir.svg?branch=master)](https://travis-ci.org/rasooll/django-pay-ir)
+[![Coverage Status](https://coveralls.io/repos/github/rasooll/django-pay-ir/badge.svg?branch=master)](https://coveralls.io/github/rasooll/django-pay-ir?branch=master)
+![PyPI](https://img.shields.io/pypi/v/django-payment-payir.svg)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-payment-payir.svg)
+![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-payment-payir.svg)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/django-payment-payir.svg)
 
 ## Installation
 
