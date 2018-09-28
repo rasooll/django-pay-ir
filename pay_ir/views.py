@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponseNotAllowed, HttpResponse
+from django.http import (
+    HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponse
+)
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.conf import settings
@@ -45,6 +47,8 @@ def req(request):
     """ This function call pay.ir API and redirect user to payment page. """
 
     if request.method == "POST":
+        if request.POST.get('amount') is None:
+            return HttpResponseBadRequest('Amount is required.')
         url = "https://pay.ir/payment/send"
         fullname = request.POST.get('fullname')
         headers = {
